@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -32,11 +33,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     EditText Landmark , PlantName;
     Editable land, plant;
     LocationManager locationManager;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        System.out.println("Hello");
         Address = findViewById(R.id.address);
         button = findViewById(R.id.button);
         Landmark = findViewById(R.id.landmark);
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("BYEEEEE");
+                Progress_bar();
                 getLocation();
             }
         });
@@ -70,20 +74,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @SuppressLint("SetTextI18n")
     @Override
     public void onLocationChanged(@NonNull Location location) {
-            //Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+            System.out.println(location.getLatitude()+"  "+location.getLongitude());
             try {
                 Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                 List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
                 String address= addresses.get(0).getAddressLine(0);
                 Address.setText(address);
+                System.out.println(" \n "+address+"     ");
                 boolean check = address.contains(land);
                 if(check == true){
                     Toast.makeText(this, "Location is Verified", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(MainActivity.this,coin.class);
-                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(this, "Location not verified", Toast.LENGTH_SHORT).show();
+                    Dismiss();
                 }
         }catch (Exception e){
             e.printStackTrace();
@@ -103,5 +108,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     public void onProviderDisabled(@NonNull String provider) {
 
+    }
+    private void Progress_bar(){
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+    }
+
+    private void Dismiss(){
+        progressDialog.dismiss();
     }
 }

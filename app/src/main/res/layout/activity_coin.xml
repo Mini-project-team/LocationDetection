@@ -7,20 +7,6 @@
     android:background="#747D7ECF"
     tools:context=".coin">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GET-LOCATION"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775" />
-
     <TextView
         android:id="@+id/address4"
         android:layout_width="wrap_content"
@@ -31,8 +17,7 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.414" />
+        app:layout_constraintVertical_bias="0.476" />
 </androidx.constraintlayout.widget.ConstraintLayout>
